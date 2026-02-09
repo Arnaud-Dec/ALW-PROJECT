@@ -4,7 +4,11 @@ require_once "Utils/FileStorage.php";
 
 session_start();
 
-$id = $_SESSION["id"];
+
+if (!isset($_SESSION["id"]) || empty($_SESSION["id"])) {
+    http_response_code(401);
+    exit();
+}
 
 $filePath = "Data/Config/game_config.json";
 
