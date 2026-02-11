@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-namespace site\App\Models;
+namespace App\Models;
 class User
 {
     public string $login;

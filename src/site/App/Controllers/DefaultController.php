@@ -1,11 +1,22 @@
 <?php
 
-namespace site\App\Controllers;
+namespace App\Controllers;
 
-use site\Framework\AbstractController;
+use Framework\AbstractController;
 
 class DefaultController extends AbstractController
 {
+
+    public function login()
+    {
+        require_once "App/Templates/login.php";
+    }
+
+    public function dashboard()
+    {
+        require_once "App/Templates/dashboard.php";
+    }
+
     public function index()
     {
         $data = "Bonjour le monde !";

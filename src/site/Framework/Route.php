@@ -1,6 +1,6 @@
 <?php
 
-namespace site\Framework;
+namespace Framework;
 
 class Route
 {

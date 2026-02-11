@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use site\App\Application;
+use App\Application;
 
 ini_set('display_errors', 'On');
 

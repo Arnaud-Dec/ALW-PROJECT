@@ -5,9 +5,9 @@ namespace App\Repositories;
 use App\Utilities\FileStorage;
 use Exception;
 
-namespace site\App\Repositories;
+namespace App\Repositories;
 
-use site\App\Utilities\FileStorage;
+use App\Utilities\FileStorage;
 
 class GameConfigRepository
 {

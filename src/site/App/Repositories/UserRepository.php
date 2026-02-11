@@ -5,9 +5,9 @@ namespace App\Repositories;
 use App\Models\User;
 use Exception;
 
-namespace site\App\Repositories;
+namespace App\Repositories;
 
-use site\App\Models\User;
+use App\Models\User;
 
 class UserRepository
 {

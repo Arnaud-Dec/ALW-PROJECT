@@ -2,7 +2,7 @@
 
 namespace App\Utilities;
 
-namespace site\App\Utilities;
+namespace App\Utilities;
 class FileStorage
 {
     private string $basePath;

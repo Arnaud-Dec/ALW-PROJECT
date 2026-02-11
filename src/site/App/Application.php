@@ -1,10 +1,10 @@
 <?php
 
-namespace site\App;
+namespace App;
 
-use site\App\Controllers\DefaultController;
-use site\Framework\AbstractApplication;
-use site\Framework\Router;
+use App\Controllers\DefaultController;
+use Framework\AbstractApplication;
+use Framework\Router;
 
 class Application extends AbstractApplication
 {
@@ -16,6 +16,8 @@ class Application extends AbstractApplication
 
         $this->router->map('GET', '/', DefaultController::class, 'index');
         $this->router->map('GET', '/test/{int:nombre}', DefaultController::class, 'test');
+        $this->router->map('GET','/login',DefaultController::class,'login');
+        $this->router->map('GET','/dashboard',DefaultController::class,'dashboard');
 
         $route = $this->router->findRoute();
         $controller = $this->router->getController($route->controller);

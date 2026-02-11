@@ -1,6 +1,6 @@
 <?php
 
-namespace site\Framework;
+namespace Framework;
 
 /**
  * All application components (controllers, models, managers, etc.)

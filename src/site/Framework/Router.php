@@ -1,6 +1,6 @@
 <?php
 
-namespace site\Framework;
+namespace Framework;
 
 /**
  * Almighty powerful and wonderful routing class

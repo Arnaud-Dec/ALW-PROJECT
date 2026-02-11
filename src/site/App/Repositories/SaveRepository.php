@@ -4,10 +4,6 @@ namespace App\Repositories;
 
 use App\Utilities\FileStorage;
 
-namespace site\App\Repositories;
-
-use site\App\Utilities\FileStorage;
-
 class SaveRepository
 {
     private FileStorage $storage;
