@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Maquette Ferme Manager</title>
+    <link rel="stylesheet" href="../../Public/style.css">
+
+    <!-- Intégration du JS (Partie 2.1) -->
+    <!-- <script src="Public/JS/FermeEngine.js" defer></script> -->
+    <!-- <script src="Public/JS/main.js" defer></script> -->
+</head>
+<body>
+<h1>Ferme Manager</h1>
+
+<section id="inventory">
+    <h2>Inventaire</h2>
+
+    {% for idProduit, infosProduit in products %}
+    <article id="product-{{ idProduit }}">
+        <h3>
+            {{ infosProduit.icon }}
+            {{ infosProduit.display }}
+        </h3>
+        <div>Stock : <output class="stock">0</output></div>
+    </article>
+
+    {% endfor %}
+</section>
+
+{% if error is defined and error is not empty %}
+    <div class="error">{{ error }}</div>
+{% endif %}
+
+<hr>
+
+<section id="buildings">
+    <h2>Bâtiments</h2>
+
+    {% for idBuilding, infosBuilding in buildings %}
+    <article id="building-{{ idBuilding }}">
+        <h3>{{ infosBuilding.display }} (Niv. <output class="level">1</output>)</h3>
+
+        <button class="harvest">{{ infosBuilding.action }}</button>
+
+        {% if infosBuilding.cost is defined %}
+        <button class="upgrade">
+            Améliorer <br>
+            Coût : <output class="cost-{{ idBuilding }}">10 {{ attribute(products, infosBuilding.cost).icon }}</output>
+        </button>
+        {% endif %}
+    </article>
+    {% endfor %}
+
+</section>
+</body>
+
+</html>

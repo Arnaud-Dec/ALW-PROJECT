@@ -12,9 +12,9 @@
         <input type="text" name="username" placeholder="Nom d'utilisateur" required autocomplete="off">
         <input type="password" name="password" placeholder="Mot de passe" required autocomplete="off">
 
-        <?php if (empty($error) == false) { ?>
-            <div class="error"><?php echo $error; ?></div>
-        <?php } ?>
+        {% if error is not empty %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
 
         <button type="submit">Se connecter</button>
     </form>

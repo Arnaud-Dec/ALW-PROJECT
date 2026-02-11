@@ -50,12 +50,23 @@ class DefaultController extends AbstractController
         }
 
         // TODO: gérer ici la connexion lors de la soumission du formulaire
-        require_once "App/Templates/login.php";
+        //---
+
+        $loader = new \Twig\Loader\FilesystemLoader('App/Templates');
+
+        $twig = new \Twig\Environment($loader);
+
+
+        $userId = $_SESSION['id'] ?? null;
+
+        echo $twig->render('login.html.twig', [
+            'id'    => $userId,
+            'error' => $error
+        ]);
     }
 
     public function dashboard()
     {
-
 
         if (!isset($_SESSION["id"]) || empty($_SESSION["id"])) {
             http_response_code(401);
@@ -70,10 +81,20 @@ class DefaultController extends AbstractController
 
         $GameConf = new GameConfigRepository($filePath);
 
-        $products = $GameConf->getProducts();
-        $buildings = $GameConf->getBuildings();
+        $products = (array) $GameConf->getProducts();
+        $buildings = (array) $GameConf->getBuildings();
 
-        require_once "App/Templates/dashboard.php";
+        //---
+
+        $loader = new \Twig\Loader\FilesystemLoader('App/Templates');
+
+        $twig = new \Twig\Environment($loader);
+
+        echo $twig->render('dashboard.html.twig', [
+            'id' => $_SESSION['id'],
+            'products' => $products,
+            'buildings' => $buildings
+        ]);
     }
 
     public function index()
