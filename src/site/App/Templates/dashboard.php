@@ -1,26 +1,3 @@
-<?php
-
-use App\Repositories\GameConfigRepository;
-
-if (!isset($_SESSION["id"]) || empty($_SESSION["id"])) {
-    http_response_code(401);
-    exit();
-}
-
-$filePath = "Data/Config/game_config.json";
-
-if (!file_exists($filePath)) {
-    die("Fichier introuvable : " . $filePath);
-}
-
-$GameConf = new GameConfigRepository($filePath);
-
-
-
-$products = $GameConf->getProducts();
-$buildings = $GameConf->getBuildings();
-
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
