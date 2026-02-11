@@ -1,9 +1,13 @@
 <?php
 
-// namespace App\Repositories;
+namespace App\Repositories;
 
-// use App\Utilities\FileStorage;
-// use Exception;
+use App\Utilities\FileStorage;
+use Exception;
+
+namespace site\App\Repositories;
+
+use site\App\Utilities\FileStorage;
 
 class GameConfigRepository
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace CPE\Framework;
+namespace site\Framework;
 
 /**
  * All application components (controllers, models, managers, etc.)

@@ -1,6 +1,6 @@
 <?php
 
-namespace CPE\Framework;
+namespace site\Framework;
 
 /**
  * Base for all controllers

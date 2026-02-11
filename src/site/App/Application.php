@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace site\App;
 
-use App\Controllers\DefaultController;
-use CPE\Framework\AbstractApplication;
-use CPE\Framework\Router;
+use site\App\Controllers\DefaultController;
+use site\Framework\AbstractApplication;
+use site\Framework\Router;
 
 class Application extends AbstractApplication
 {

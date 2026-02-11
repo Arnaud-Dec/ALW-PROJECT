@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace site\App\Controllers;
 
-use CPE\Framework\AbstractController;
+use site\Framework\AbstractController;
 
 class DefaultController extends AbstractController
 {

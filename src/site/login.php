@@ -1,6 +1,6 @@
 <?php
 
-require_once "Utils/User.php";
+use site\App\Repositories\UserRepository;require_once "Utils/User.php";
 require_once "Utils/FileStorage.php";
 require_once "Utils/UserRepository.php";
 

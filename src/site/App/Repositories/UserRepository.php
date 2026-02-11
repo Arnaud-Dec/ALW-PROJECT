@@ -1,9 +1,13 @@
 <?php
 
-// namespace App\Repositories;
+namespace App\Repositories;
 
-// use App\Models\User;
-// use Exception;
+use App\Models\User;
+use Exception;
+
+namespace site\App\Repositories;
+
+use site\App\Models\User;
 
 class UserRepository
 {
@@ -49,7 +53,8 @@ class UserRepository
      * @param string $login
      * @return User|null
      */
-    public function get(string $login): ?User {
+    public function get(string $login): ?User
+    {
         return $this->users[$login] ?? null;
     }
 
@@ -58,7 +63,8 @@ class UserRepository
      *
      * @return User[]
      */
-    public function getAll(): array {
+    public function getAll(): array
+    {
         return $this->users;
     }
 }

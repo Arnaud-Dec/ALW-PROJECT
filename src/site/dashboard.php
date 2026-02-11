@@ -1,4 +1,7 @@
 <?php
+
+use site\App\Repositories\GameConfigRepository;
+
 require_once "Utils/GameConfigRepository.php";
 require_once "Utils/FileStorage.php";
 

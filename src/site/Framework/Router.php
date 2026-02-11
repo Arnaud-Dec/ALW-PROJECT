@@ -1,6 +1,6 @@
 <?php
 
-namespace CPE\Framework;
+namespace site\Framework;
 
 /**
  * Almighty powerful and wonderful routing class
