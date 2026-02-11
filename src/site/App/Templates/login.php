@@ -2,8 +2,6 @@
 
 use App\Repositories\UserRepository;
 
-session_start();
-
 var_dump("mdp Beer4Life");
 
 $error = null;

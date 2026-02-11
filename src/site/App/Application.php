@@ -10,6 +10,8 @@ class Application extends AbstractApplication
 {
     public function run()
     {
+        session_start();
+
         // map all routes to corresponding controllers/actions
         $this->router = new Router($this);
         $this->router->mapDefault(DefaultController::class, 'error404');
