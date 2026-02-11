@@ -23,9 +23,6 @@ $GameConf = new GameConfigRepository($filePath);
 $products = $GameConf->getProducts();
 $buildings = $GameConf->getBuildings();
 
-var_dump($products);
-var_dump($buildings);
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,21 +30,7 @@ var_dump($buildings);
 <head>
     <meta charset="UTF-8">
     <title>Maquette Ferme Manager</title>
-    <style>
-        /* Styles indicatifs (non imposés) */
-        article {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 5px;
-            display: inline-block;
-            width: 200px;
-            vertical-align: top;
-        }
-
-        .icon {
-            font-size: 2em;
-        }
-    </style>
+    <link rel="stylesheet" href="Public/style.css">
 
     <!-- Intégration du JS (Partie 2.1) -->
     <!-- <script src="Public/JS/FermeEngine.js" defer></script> -->
