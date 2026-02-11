@@ -1,10 +1,6 @@
 <?php
 
-use site\App\Repositories\UserRepository;require_once "Utils/User.php";
-require_once "Utils/FileStorage.php";
-require_once "Utils/UserRepository.php";
-
-
+use App\Repositories\UserRepository;
 
 session_start();
 
@@ -56,7 +52,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="Public/style.css">
+    <link rel="stylesheet" href="../../Public/style.css">
 </head>
 <body>
     <form action="" method="POST" class="loginForm">

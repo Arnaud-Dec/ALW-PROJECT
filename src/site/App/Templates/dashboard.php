@@ -1,9 +1,6 @@
 <?php
 
-use site\App\Repositories\GameConfigRepository;
-
-require_once "Utils/GameConfigRepository.php";
-require_once "Utils/FileStorage.php";
+use App\Repositories\GameConfigRepository;
 
 session_start();
 
@@ -33,7 +30,7 @@ $buildings = $GameConf->getBuildings();
 <head>
     <meta charset="UTF-8">
     <title>Maquette Ferme Manager</title>
-    <link rel="stylesheet" href="Public/style.css">
+    <link rel="stylesheet" href="../../Public/style.css">
 
     <!-- Intégration du JS (Partie 2.1) -->
     <!-- <script src="Public/JS/FermeEngine.js" defer></script> -->
