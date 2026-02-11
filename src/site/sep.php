@@ -1,4 +1,10 @@
 <?php
-require_once "login.php";
+
+
+
+
+$TARGET= $_GET["page"] . ".php";
+
+require_once $TARGET;
 
 ?>

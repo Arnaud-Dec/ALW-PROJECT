@@ -7,6 +7,9 @@ require_once "Utils/UserRepository.php";
 
 
 session_start();
+
+var_dump("mdp Beer4Life");
+
 $error = null;
 
 $repo = new UserRepository("Data/users.json");
