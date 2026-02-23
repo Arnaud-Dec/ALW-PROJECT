@@ -7,6 +7,11 @@ use App\Repositories\UserRepository;
 use App\Repositories\GameConfigRepository;
 class DefaultController extends AbstractController
 {
+    public function getTwig()
+    {
+        $loader = new \Twig\Loader\FilesystemLoader('App/Templates');
+        return new \Twig\Environment($loader);
+    }
 
     public function login()
     {
@@ -52,9 +57,7 @@ class DefaultController extends AbstractController
         // TODO: gérer ici la connexion lors de la soumission du formulaire
         //---
 
-        $loader = new \Twig\Loader\FilesystemLoader('App/Templates');
-
-        $twig = new \Twig\Environment($loader);
+        $twig = $this->getTwig();
 
 
         $userId = $_SESSION['id'] ?? null;
@@ -86,9 +89,7 @@ class DefaultController extends AbstractController
 
         //---
 
-        $loader = new \Twig\Loader\FilesystemLoader('App/Templates');
-
-        $twig = new \Twig\Environment($loader);
+        $twig = $this->getTwig();
 
         echo $twig->render('dashboard.html.twig', [
             'id' => $_SESSION['id'],
@@ -99,9 +100,16 @@ class DefaultController extends AbstractController
 
     public function index()
     {
+
+        $twig = $this->getTwig();
+
         $data = "Bonjour le monde !";
         $this->app->view()->setParam('pageTitle', $data);
-        $this->app->view()->render('homepage.tpl.php');
+
+        echo $twig->render('homepage.html.twig', [
+            'message' => $data,
+            'parameters' => $this->parameters
+        ]);
     }
 
     public function test()
@@ -115,6 +123,7 @@ class DefaultController extends AbstractController
     public function error404()
     {
         http_response_code(404);
-        $this->app->view()->render('404.tpl.php');
+        echo $this->getTwig()->render('404.html.twig');
+
     }
 }

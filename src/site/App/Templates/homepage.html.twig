@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="Public/style.css">
 </head>
 <body>
-    <h1><?php echo $pageTitle; ?></h1>
+    <h1>{{ pageTitle }}</h1>
     <p>Ceci est un exemple de rendu HTML généré par le Framework :</p>
     <ol>
         <li>Sa route est définie dans <code>Application.php</code> par un appel à <code>$this->router->map(...);</code></li>
@@ -20,14 +20,14 @@
             </ul>
         </li>
     </ol>
-    <pre><?php print_r(get_defined_vars()); ?></pre>
+    <pre>{{ parameters|default('Aucun paramètre') }}</pre>
+
     <p>D'autres exemples de pages :</p>
     <ul>
-        <li><a href="<?php echo $this->buildRoute("/n'importe quelle url inexistante"); ?>">Page 404</a></li>
-        <li><a href="<?php
-            $varContainingDynamicValue = 12;
-            echo $this->buildRoute('/test/%s', $varContainingDynamicValue);
-            ?>">Page "test" paramétrée (avec la valeur 12)</a></li>
+        <li><a href="/n-importe-quelle-url-inexistante">Page 404</a></li>
+
+        {% set varContainingDynamicValue = 12 %}
+        <li><a href="/test/{{ varContainingDynamicValue }}">Page "test" paramétrée (avec la valeur 12)</a></li>
     </ul>
 </body>
 </html>

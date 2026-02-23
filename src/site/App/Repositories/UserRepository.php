@@ -5,10 +5,6 @@ namespace App\Repositories;
 use App\Models\User;
 use Exception;
 
-namespace App\Repositories;
-
-use App\Models\User;
-
 class UserRepository
 {
     private string $filePath;
