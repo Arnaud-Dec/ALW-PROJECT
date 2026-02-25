@@ -20,6 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
+
+                for (const [productName, quantity] of Object.entries(data)){
+                    const productArticle = document.querySelector(`#product-${productName}`)
+
+                    if(productArticle){
+                        const outputStock = productArticle.querySelector(`output.stock`);
+
+                        if(outputStock){
+                            outputStock.textContent = quantity;
+                        }
+                    }
+                }
+
             });
 
         // TODO: coder le chargement puis l'affichage des bâtiments
