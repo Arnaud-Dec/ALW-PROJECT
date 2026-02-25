@@ -32,10 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
                 }
-
             });
 
-        // TODO: coder le chargement puis l'affichage des bâtiments
+        fetch(API_URL+'/api/joueurs/'+username+'/buildings')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                engine.renderBuildings(data);
+            });
     });
 
     // Au clic sur "Récolter"

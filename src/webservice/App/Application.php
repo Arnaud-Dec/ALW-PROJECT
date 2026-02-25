@@ -15,6 +15,7 @@ class Application extends AbstractApplication
 
         $this->router->mapDefault(DefaultController::class, 'error404');
         $this->router->map('GET', '/api/joueurs/{string:nom}/inventaire', \App\Controllers\ApiControlleur::class, 'getInventory');
+        $this->router->map('GET', '/api/joueurs/{string:nom}/buildings', \App\Controllers\ApiControlleur::class, 'getBuildings');
 
         $route = $this->router->findRoute();
         $controller = $this->router->getController($route->controller);
