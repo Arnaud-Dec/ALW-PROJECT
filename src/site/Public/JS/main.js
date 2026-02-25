@@ -16,7 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
     engine.onLoadState(() => {
         console.log(`Rafraîchissement de l'état global du jeu`);
 
-        // TODO: coder le chargement puis l'affichage de l'inventaire
+        fetch('http://+'+API_URL+'/api/joueurs/'+username+'/inventaire')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            });
 
         // TODO: coder le chargement puis l'affichage des bâtiments
     });
