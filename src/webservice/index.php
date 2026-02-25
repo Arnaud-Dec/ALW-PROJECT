@@ -13,4 +13,8 @@ require_once('Framework/autoloader.php');
 
 // start the application
 $app = new Application();
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
+
 $app->run();
