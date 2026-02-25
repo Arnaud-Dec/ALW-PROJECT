@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     engine.onLoadState(() => {
         console.log(`Rafraîchissement de l'état global du jeu`);
 
-        fetch('http://+'+API_URL+'/api/joueurs/'+username+'/inventaire')
+        fetch(API_URL+'/api/joueurs/'+username+'/inventaire')
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
