@@ -10,7 +10,11 @@ class DefaultController extends AbstractController
     public function getTwig()
     {
         $loader = new \Twig\Loader\FilesystemLoader('App/Templates');
-        return new \Twig\Environment($loader);
+        $twig = new \Twig\Environment($loader);
+
+        $twig->addGlobal('id', $_SESSION['id'] ?? null);
+
+        return $twig;
     }
 
     public function login()

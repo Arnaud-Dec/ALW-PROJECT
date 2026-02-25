@@ -1,0 +1,14 @@
+<header>
+    <nav>
+        <ul>
+            {% if id is defined and id is not null %}
+                <li> Joueur :<strong> {{ id }}</strong> </li>
+                <li><a href="/dashboard">Tableau de bord</a></li>
+                <li><a href="/logout">Déconnexion</a></li>
+            {% else %}
+                <li><a href="/login"> Connexion </a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+

@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends 'base.html.twig' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Maquette Ferme Manager</title>
-    <link rel="stylesheet" href="../../Public/style.css">
+{% block title %}Page d'exemple{% endblock %}
 
-    <!-- Intégration du JS (Partie 2.1) -->
-    <!-- <script src="Public/JS/FermeEngine.js" defer></script> -->
-    <!-- <script src="Public/JS/main.js" defer></script> -->
-</head>
-<body>
-<h1>Ferme Manager</h1>
+{% block body %}
+<h1>{{ pageTitle }}</h1>
 
 <section id="inventory">
     <h2>Inventaire</h2>
@@ -53,6 +45,4 @@
     {% endfor %}
 
 </section>
-</body>
-
-</html>
+{% endblock %}

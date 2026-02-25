@@ -1,13 +1,8 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Page d'exemple</title>
+{% extends 'base.html.twig' %}
 
-    <!-- chemin relatif à la racine du projet -->
-    <link rel="stylesheet" href="Public/style.css">
-</head>
-<body>
+{% block title %}Page d'exemple{% endblock %}
+
+{% block body %}
     <h1>{{ pageTitle }}</h1>
     <p>Ceci est un exemple de rendu HTML généré par le Framework :</p>
     <ol>
@@ -29,5 +24,4 @@
         {% set varContainingDynamicValue = 12 %}
         <li><a href="/test/{{ varContainingDynamicValue }}">Page "test" paramétrée (avec la valeur 12)</a></li>
     </ul>
-</body>
-</html>
+{% endblock %}
