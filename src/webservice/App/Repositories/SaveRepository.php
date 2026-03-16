@@ -75,32 +75,29 @@ class SaveRepository
     public function getLevel(string $username, string $generator): int
     {
         $save = $this->load($username);
-        foreach ($save->buildings as $b) {
-            if ($b->id === $generator) {
-                return $b->level;
-            }
+
+        if (isset($save->buildings->{$generator})) {
+            return $save->buildings->{$generator}->level;
         }
+
         return 0;
     }
 
     public function setLevel(string $username, string $generator, int $value): void
     {
         $save = $this->load($username);
-        $found = false;
-        foreach ($save['buildings'] as &$b) {
-            if ($b['id'] === $generator) {
-                $b['level'] = $value;
-                $found = true;
-                break;
-            }
-        }
-        if (!$found) {
-            $save['buildings'][] = [
-                'id' => $generator,
+
+        if (isset($save->buildings->{$generator})) {
+            // Si oui, on met à jour son niveau
+            $save->buildings->{$generator}->level = $value;
+        } else {
+            $save->buildings->{$generator} = (object)[
                 'level' => $value,
                 'last_harvest' => null
             ];
         }
+
+        // On enregistre la modification
         $this->save($username, $save);
     }
 }
