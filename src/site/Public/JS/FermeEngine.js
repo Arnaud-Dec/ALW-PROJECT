@@ -75,27 +75,12 @@ class FermeEngine {
             const upgradeBtn = container.querySelector('.upgrade');
             if (upgradeBtn) {
                 if (playerInventory) {
-                    // Pour l'upgrade, on utilise ce que produit le bâtiment
-                    const costResource = buildingConfig.production;
+                    const costResource = buildingConfig.cost;
                     const playerStock = playerInventory[costResource] || 0;
                     // On désactive si pas assez de ressources
                     upgradeBtn.disabled = playerStock < nextCost;
                 } else {
                     upgradeBtn.disabled = false; // Par défaut, toujours actif si pas d'inventaire fourni
-                }
-            }
-
-            // Gestion bouton "Récolter/Produire" (activé/désactivé selon les ingrédients)
-            const harvestBtn = container.querySelector('.harvest');
-            if (harvestBtn) {
-                if (playerInventory && buildingConfig.cost) {
-                    // Si le bâtiment a besoin d'ingrédients
-                    const ingredientResource = buildingConfig.cost;
-                    const playerStock = playerInventory[ingredientResource] || 0;
-                    // On désactive si pas assez d'ingrédients
-                    harvestBtn.disabled = playerStock < 1;
-                } else {
-                    harvestBtn.disabled = false; // Pas d'ingrédients requis ou pas d'inventaire fourni
                 }
             }
         });
