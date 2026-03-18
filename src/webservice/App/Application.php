@@ -26,6 +26,7 @@ class Application extends AbstractApplication
         $this->router->map('POST','/api/joueurs/{string:nom}/inventaire', \App\Controllers\ApiControlleur::class, 'editInventory');
         $this->router->map('POST','/api/joueurs/{string:nom}/building',\App\Controllers\ApiControlleur::class, 'editBuildingLevel');
         $this->router->map('POST','/api/joueurs/{string:nom}/building/harvest',\App\Controllers\ApiControlleur::class,'harvest');
+        $this->router->map('POST','/api/joueurs/{string:nom}/building/upgrade',\App\Controllers\ApiControlleur::class,'upgrade');
 
         $route = $this->router->findRoute();
         $controller = $this->router->getController($route->controller);

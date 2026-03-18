@@ -72,9 +72,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // Au clic sur "Améliorer"
     engine.onUpgrade((buildingId) => {
         console.log(`Amélioration demandée sur ${buildingId}`);
-        // TODO: Coder l'appel API pour augmenter le niveau d'un bâtiment donné
-        // IMPORTANT: Retournez la promesse du fetch avec le mot clé 'return'
-        // ex: return fetch(...);
+        return fetch(API_URL + 'api/joueurs/' + username +'/building/upgrade',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                building: buildingId
+            })
+        })
+            .then(data =>{
+                console.log("Résultat d'amélioration :", data);
+            })
+            .catch(error => {
+                console.error("Problème lors de l'amélioration:" ,error);
+            })
     });
 
     // Démarrage

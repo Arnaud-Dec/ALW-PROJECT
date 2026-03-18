@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Framework\AbstractController; // Import nécessaire
 use App\Repositories\SaveRepository;
+use App\Repositories\GameConfigRepository;
 
 class ApiControlleur extends AbstractController // Ajout de l'héritage
 {
@@ -11,6 +12,11 @@ class ApiControlleur extends AbstractController // Ajout de l'héritage
     public function getSaveRepository(): SaveRepository{
         $filePathSave = "Data/Saves/";
         return new SaveRepository($filePathSave, "Data/Saves/default.json");
+    }
+    public function getGameConfigRepository() : GameConfigRepository
+    {
+        $filePathConf = "Data/Config/game_config.json";
+        return new GameConfigRepository($filePathConf);
     }
 
     /// INVENTORY
@@ -112,6 +118,68 @@ class ApiControlleur extends AbstractController // Ajout de l'héritage
                 http_response_code(400);
                 echo json_encode(["error" => "Bâtiment inconnu"]);
             }
+        }
+    }
+
+    public function upgrade()
+    {
+        $nom = $this->parameters['nom'];
+        $data = json_decode(file_get_contents('php://input'));
+
+        if (!$data || !isset($data->building)) {
+            http_response_code(400);
+            header('Content-Type: application/json');
+            echo json_encode(["error" => "Bâtiment manquant dans la requête"]);
+            return;
+        }
+
+        $building = $data->building;
+
+        $mapping = [
+            "moulin"      => "ble",
+            "boulangerie" => "farine"
+        ];
+
+        if (!isset($mapping[$building])) {
+            http_response_code(400);
+            header('Content-Type: application/json');
+            echo json_encode(["error" => "Bâtiment inconnu ou impossible à améliorer"]);
+            return;
+        }
+
+        $product = $mapping[$building];
+
+        $Save = $this->getSaveRepository();
+        $level = $Save->getLevel($nom, $building);
+
+        $gameConfig = $this->getGameConfigRepository();
+        $cost = $gameConfig->getUpgradeCost($building, $level + 1);
+
+        $nbProduct = $Save->getProduct($nom, $product);
+
+        header('Content-Type: application/json');
+
+        if ($nbProduct >= $cost) {
+            $Save->setLevel($nom, $building, $level + 1);
+            $Save->setProduct($nom, $product, $nbProduct - $cost);
+
+            http_response_code(200);
+            echo json_encode([
+                "status" => "success",
+                "newLevel" => $level + 1,
+                "cost" => $cost,
+                "inventoryNow" => $nbProduct - $cost,
+                "product" => $product
+            ]);
+        } else {
+            http_response_code(400);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Pas assez de ressources",
+                "cost" => $cost,
+                "inventory" => $nbProduct,
+                "product" => $product
+            ]);
         }
     }
 
