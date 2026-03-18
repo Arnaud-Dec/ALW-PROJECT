@@ -26,9 +26,15 @@ class FermeEngine {
         };
 
         // Délai avant d'attacher les événements pour s'assurer que le DOM est prêt
-        document.addEventListener("DOMContentLoaded", () => {
+        // Délai avant d'attacher les événements pour s'assurer que le DOM est prêt
+        if (document.readyState === 'loading') {
+            document.addEventListener("DOMContentLoaded", () => {
+                this.attachEvents();
+            });
+        } else {
+            // Si la page est DÉJÀ chargée quand on crée le moteur, on attache directement
             this.attachEvents();
-        });
+        }
     }
 
     /**
@@ -111,8 +117,10 @@ class FermeEngine {
 
     attachEvents() {
         const batiments = document.querySelectorAll('#buildings article');
+        console.log(`[FermeEngine] attachEvents: ${batiments.length} bâtiment(s) trouvé(s)`);
         batiments.forEach(batiment => {
             const buildingId = batiment.id.replace('building-', '');
+            console.log(`[FermeEngine] Attache événements sur: ${buildingId}`);
 
             const harvestBtn = batiment.querySelector('.harvest');
             if (harvestBtn) {

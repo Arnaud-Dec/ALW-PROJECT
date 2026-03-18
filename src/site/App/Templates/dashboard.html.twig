@@ -36,10 +36,10 @@
     <h2>Bâtiments</h2>
 
     {% for idBuilding, infosBuilding in buildings %}
-    <article id="building-{{ idBuilding }}">
-        <h3>{{ infosBuilding.display }} (Niv. <output class="level">1</output>)</h3>
+        <article id="building-{{ idBuilding }}" data-id="{{ idBuilding }}">
+            <h3>{{ infosBuilding.display }} (Niv. <output class="level">1</output>)</h3>
 
-        <button class="harvest">{{ infosBuilding.action }}</button>
+            <button class="harvest">{{ infosBuilding.action }}</button>
 
         {% if infosBuilding.cost is defined %}
         <button class="upgrade">

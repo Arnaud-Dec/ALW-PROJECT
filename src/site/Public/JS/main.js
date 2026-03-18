@@ -42,12 +42,31 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    // Au clic sur "Récolter"
     engine.onHarvest((buildingId) => {
         console.log(`Récolte demandée sur ${buildingId}`);
-        // TODO: coder l'appel API pour récolter/produire une ressource depuis un bâtiment donné
-        // IMPORTANT: Retournez la promesse du fetch avec le mot clé 'return'
-        // ex: return fetch(...);
+
+        return fetch(API_URL + 'api/joueurs/' + username + '/building/harvest', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                building: buildingId
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erreur réseau ou bâtiment invalide");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Résultat de la récolte :", data);
+
+            })
+            .catch(error => {
+                console.error("Problème lors de la récolte :", error);
+            });
     });
 
     // Au clic sur "Améliorer"

@@ -56,7 +56,7 @@ class SaveRepository
     public function getProduct(string $username, string $product): int
     {
         $inventory = $this->getInventory($username);
-        return $inventory[$product] ?? 0;
+        return $inventory->{$product} ?? 0;
     }
 
     public function setProduct(string $username, string $product, int $value): void

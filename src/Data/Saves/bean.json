@@ -1,8 +1,8 @@
 {
     "inventory": {
-        "ble": 70,
-        "farine": 0,
-        "pain": 0,
+        "ble": 85,
+        "farine": 24,
+        "pain": 14,
         "monnaie": 10
     },
     "buildings": {

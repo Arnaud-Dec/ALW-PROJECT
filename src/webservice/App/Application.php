@@ -11,6 +11,11 @@ class Application extends AbstractApplication
     public function run()
     {
 
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit();
+        }
+
         $this->router = new Router($this);
 
         $this->router->mapDefault(DefaultController::class, 'error404');
@@ -20,6 +25,7 @@ class Application extends AbstractApplication
 
         $this->router->map('POST','/api/joueurs/{string:nom}/inventaire', \App\Controllers\ApiControlleur::class, 'editInventory');
         $this->router->map('POST','/api/joueurs/{string:nom}/building',\App\Controllers\ApiControlleur::class, 'editBuildingLevel');
+        $this->router->map('POST','/api/joueurs/{string:nom}/building/harvest',\App\Controllers\ApiControlleur::class,'harvest');
 
         $route = $this->router->findRoute();
         $controller = $this->router->getController($route->controller);
