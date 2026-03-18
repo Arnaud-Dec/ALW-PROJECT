@@ -41,10 +41,10 @@
 
             <button class="harvest">{{ infosBuilding.action }}</button>
 
-        {% if infosBuilding.cost is defined %}
+        {% if infosBuilding.production is defined %}
         <button class="upgrade">
             Améliorer <br>
-            Coût : <output class="cost-{{ idBuilding }}">10 {{ attribute(products, infosBuilding.cost).icon }}</output>
+            Coût : <output class="cost">10</output> {{ attribute(products, infosBuilding.production).icon }}
         </button>
         {% endif %}
     </article>

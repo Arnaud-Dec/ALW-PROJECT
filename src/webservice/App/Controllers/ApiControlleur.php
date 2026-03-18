@@ -92,32 +92,64 @@ class ApiControlleur extends AbstractController // Ajout de l'héritage
         if ($data && isset($data->building)) {
             $building = $data->building;
             $Save = $this->getSaveRepository();
-
-            // ressource en fonction du batiment
-            $mapping = [
-                "champ_ble"   => "ble",
-                "moulin"      => "farine",
-                "boulangerie" => "pain"
-            ];
-
-            if (isset($mapping[$building])){
-                $product = $mapping[$building];
-                $nbProduct = $Save->getProduct($nom , $product);
-
-                $nbProduct++;
-                $Save->setProduct($nom,$product,$nbProduct);
-
-                http_response_code(200);
-                header('Content-Type: application/json');
-                echo json_encode([
-                    "status" => "success",
-                    "added" => 1,
-                    "inventory" => $Save->getInventory($nom)
-                ]);
-            }else{
+            
+            $gameConfig = $this->getGameConfigRepository();
+            $buildingConfig = $gameConfig->getBuilding($building);
+            
+            if (!$buildingConfig) {
                 http_response_code(400);
+                header('Content-Type: application/json');
                 echo json_encode(["error" => "Bâtiment inconnu"]);
+                return;
             }
+
+            $product = $buildingConfig->production ?? null;
+            if (!$product) {
+                http_response_code(400);
+                header('Content-Type: application/json');
+                echo json_encode(["error" => "Bâtiment ne produit rien"]);
+                return;
+            }
+
+            // Vérifier si le bâtiment a besoin d'ingrédients
+            $costResource = $buildingConfig->cost ?? null;
+            
+            if ($costResource) {
+                // Le bâtiment consomme des ingrédients
+                $currentStock = $Save->getProduct($nom, $costResource);
+                if ($currentStock < 1) {
+                    http_response_code(400);
+                    header('Content-Type: application/json');
+                    echo json_encode([
+                        "status" => "error", 
+                        "message" => "Pas assez d'ingrédients",
+                        "needed" => $costResource,
+                        "inventory" => $currentStock
+                    ]);
+                    return;
+                }
+                
+                // Consommer l'ingrédient
+                $Save->setProduct($nom, $costResource, $currentStock - 1);
+            }
+
+            // Produire le résultat
+            $nbProduct = $Save->getProduct($nom, $product);
+            $nbProduct++;
+            $Save->setProduct($nom, $product, $nbProduct);
+
+            http_response_code(200);
+            header('Content-Type: application/json');
+            echo json_encode([
+                "status" => "success",
+                "added" => 1,
+                "consumed" => $costResource ? [$costResource => 1] : [],
+                "inventory" => $Save->getInventory($nom)
+            ]);
+        } else {
+            http_response_code(400);
+            header('Content-Type: application/json');
+            echo json_encode(["error" => "Données manquantes"]);
         }
     }
 
@@ -135,19 +167,25 @@ class ApiControlleur extends AbstractController // Ajout de l'héritage
 
         $building = $data->building;
 
-        $mapping = [
-            "moulin"      => "ble",
-            "boulangerie" => "farine"
-        ];
-
-        if (!isset($mapping[$building])) {
+        $gameConfig = $this->getGameConfigRepository();
+        $buildingConfig = $gameConfig->getBuilding($building);
+        
+        if (!$buildingConfig) {
             http_response_code(400);
             header('Content-Type: application/json');
-            echo json_encode(["error" => "Bâtiment inconnu ou impossible à améliorer"]);
+            echo json_encode(["error" => "Bâtiment inconnu"]);
             return;
         }
 
-        $product = $mapping[$building];
+        // Pour l'upgrade, on utilise ce que produit le bâtiment
+        $product = $buildingConfig->production ?? null;
+        
+        if (!$product) {
+            http_response_code(400);
+            header('Content-Type: application/json');
+            echo json_encode(["error" => "Bâtiment impossible à améliorer"]);
+            return;
+        }
 
         $Save = $this->getSaveRepository();
         $level = $Save->getLevel($nom, $building);
